@@ -99,11 +99,46 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
 * You can filter the results using AWK
-1. Only consider relevant topologies
+1. Only consider relevant topologies ((Cave,Cave),Spotted)
 2. Flip H1 and H2 if negative for easier comparisons
+
 `awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_aardwolfH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 5 | less`
 
-* Filter and plot using R
+* If comparing between methods, you can also filter and plot using R
+```R
+### Dstats
+# Load the data from each file
+data1 <- read.table("Spottedmap_minind11_aardwolfH4.jack.txt", header = TRUE, sep = "\t")
+data2 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
 
-* 
+# Prepend text to the headers of each data frame
+names(data1) <- paste("AardwolfH4", names(data1), sep = "_")
+names(data2) <- paste("StripedH4", names(data2), sep = "_")
+
+### Further filter to only include the comparisons of interest
+## i.e. ((Cave,Cave),Spotted)
+filtered_data1 <- data1[grepl("Cave", data1[,1], ignore.case = TRUE) & 
+                          grepl("Cave", data1[,2], ignore.case = TRUE) & 
+                          grepl("Spot", data1[,3], ignore.case = TRUE), ]
+filtered_data2 <- data2[grepl("Cave", data1[,1], ignore.case = TRUE) & 
+                          grepl("Cave", data1[,2], ignore.case = TRUE) & 
+                          grepl("Spot", data1[,3], ignore.case = TRUE), ]
+
+## OR ((Spotted,Spotted),Cave)
+filtered_data1 <- data1[grepl("Spot", data1[,1], ignore.case = TRUE) & 
+                          grepl("Spot", data1[,2], ignore.case = TRUE) & 
+                          grepl("Cave", data1[,3], ignore.case = TRUE), ]
+filtered_data2 <- data2[grepl("Spot", data1[,1], ignore.case = TRUE) & 
+                          grepl("Spot", data1[,2], ignore.case = TRUE) & 
+                          grepl("Cave", data1[,3], ignore.case = TRUE), ]
+
+## Combine the data
+combined_data <- cbind(filtered_data1, filtered_data2)
+
+head(combined_data)
+
+plot(combined_data$AardwolfH4_Z,combined_data$StripedH4_Z)
+## Add a 1:1 line to represent unbiased results
+abline(0,1,col=2)
+``` 
 
