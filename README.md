@@ -146,22 +146,30 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 * Build fasta using consensus base call in ANGSD and unzip it
 `angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -r HiC_scaffold_1`
 `gunzip NamCrocuta.fa.gz`
-* Prepare directories for gargammel
+* Prepare directories for gargammel inlcuding three directories “bact” “cont” “endo” 
 
 `mkdir Sequences`
 
 `cd Sequences/`
 
-Make three directories “bact” “cont” “endo” and put the gunzipped fasta file in the endo folder. Index the fasta file using samtools faidx file.fasta
 `mkdir bact cont endo`
 
-Put the genome into the "endo" directory and index it
+* Put the genome into the "endo" directory and index it
+
 `cp NamCrocuta.fa endo`
+
 `samtools faidx NamCrocuta.fa`
-Create a txt file with the proportion of each fragment lengths based on the mapdamage read lengths from your empirical data (file lgdistribution.txt in the mapdamage output directory):  `awk '/\+/{sum+=$3; count[$2]+=$3} END{for (i in count) print i"\t"count[i]/sum}' lgdistribution.txt > Fragment_lengths.txt`
+
+* Create a txt file with the proportion of each fragment lengths based on the mapdamage read lengths from your empirical data (file lgdistribution.txt in the mapdamage output directory):
+
+`awk '/\+/{sum+=$3; count[$2]+=$3} END{for (i in count) print i"\t"count[i]/sum}' lgdistribution.txt > Fragment_lengths.txt`
+
 * Run gargammel
+
 `gargammel -h`
+
 `gargammel -c 1 --comp 0,0,1 -f /home/zhc860/data/Cave_hyena/Workshop/Results/Ccsp015_mapdamage/Fragment_lengths.txt -mapdamage /home/zhc860/data/Cave_hyena/Workshop/Results/Ccsp015_mapdamage/misincorporation.txt single -rl 80 -o NamCroc.damaged Sequences`
+
 The paired end output fastq of interest will end in _s1.fq.gz _s2.fq.gz
 
 * Map reads using the script availabe in this github 
