@@ -34,13 +34,20 @@ Note: It can take awhile to run so while plotting the first outputs make sure th
 
 ## Run analyses to infer population structure
 * PCA (GL and pseudo haploid base call)
-angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -r HiC_scaffold_1 -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta
-pcangsd -b Spottedmap_minind11.beagle.gz -t 2 -o Spottedmap_minind11_pcangsd
+  
+`angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -r HiC_scaffold_1 -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta`
+
+`pcangsd -b Spottedmap_minind11.beagle.gz -t 2 -o Spottedmap_minind11_pcangsd`
+
 * Pairwise distances/phylogenetic trees (NJ)
-Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top
-(e.g. cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile)
-fastme -i Spottedmap_minind11.infile -o Spottedmap_minind11.tree
-The output can then be visualised with your favourite tree visualisation tool (e.g. figtree)
+
+`Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top
+(e.g. cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile)`
+
+`fastme -i Spottedmap_minind11.infile -o Spottedmap_minind11.tree`
+
+`The output can then be visualised with your favourite tree visualisation tool (e.g. figtree)`
+
 ### Question: Is there structure in this dataset? What are the differences between the genotype
 
 ## Run analysis to infer gene flow (D-statistics)
