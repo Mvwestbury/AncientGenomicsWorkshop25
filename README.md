@@ -38,7 +38,8 @@ Note: It can take awhile to run so while plotting the first outputs make sure th
 ## Run analyses to infer population structure
 ### PCA (GL and pseudo haploid base call)
   
-* Performed genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls
+* Performed genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls - This example applies filters I commonly use, if you want to know what all filters mean they are listed in the .arg file output after running the command
+  
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -r HiC_scaffold_1 -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta`
 
 * Use PCANGSD to computed a covariance matrix from the GL `pcangsd -b Spottedmap_minind11.beagle.gz -t 2 -o Spottedmap_minind11_pcangsd`
@@ -48,7 +49,7 @@ Note: It can take awhile to run so while plotting the first outputs make sure th
   Example
 
 ```R
-# Import the covariance matrix (either -ibsMat for pseudohaploid or .cov for GL)
+# Import the covariance matrix (either -covMat for pseudohaploid or .cov for GL)
 e=eigen(as.matrix(read.table("Spottedmap_minind11.covMat")))
 
 # Extract eigenvalues
@@ -87,6 +88,7 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 ### Question: Is there structure in this dataset? Are there differences between the base call methods?
 
 ## Run analysis to infer gene flow (D-statistics)
-angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref ../../../Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0
-Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack
+`angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref ../../../Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
+
+`Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
