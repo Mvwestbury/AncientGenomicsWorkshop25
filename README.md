@@ -18,7 +18,7 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 - See what the possible parameters are
 
 `mapDamage -h`
-- Run mapdamage (optimised for speed)
+### Run mapdamage (optimised for speed)
  * Example individual - Ccsp015
 
 `mapDamage -i Ccsp015.rmdup.sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta -d Results/Ccsp015_mapdamage --downsample 1000000`
