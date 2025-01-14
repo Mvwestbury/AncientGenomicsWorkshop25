@@ -44,20 +44,26 @@ Note: It can take awhile to run so while plotting the first outputs make sure th
   Example
 
 ```R
+# Import the covariance matrix (either -ibsMat for pseudohaploid or .cov for GL)
 e=eigen(as.matrix(read.table("Spottedmap_minind11.covMat")))
+# Extract eigenvalues
 eigens=e$values/sum(e$values)*100
-
+# Visualise the eigenvalues from the first ten Principal components
 barplot(yaxt="n",names.arg=c(1:10),ylab="Percentage of variation",xlab="Principal component",eigens[1:10])
 axis(2,las=2)
+# Set the colours (the order of individuals is defined in your bamlist)
 colours=c(2,2,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2)
+#Plot PCA
 plot(e$vectors[,1], e$vectors[,2], lwd=2,
      ylab=sprintf("PC 2 (%.2f%%)", eigens[2]),
      xlab=sprintf("PC 1 (%.2f%%)", eigens[1]),
      col=colours, pch=16, cex=2, cex.lab=1.5, font=2)
+#Add label
 par(new=T)
 labes=c("Cave", "Spotted")
 legend("top",labes,cex=1,col=c(1,2),pch=16,bty='n')
 
+#Print as PDF
 dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 ```
 
