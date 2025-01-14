@@ -99,11 +99,10 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
 * You can filter the results using AWK
-
-Only consider relevant topologies
-Flip H1 and H2 if negative for easier comparisons
+1. Only consider relevant topologies
+2. Flip H1 and H2 if negative for easier comparisons
 `awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_aardwolfH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 5 | less`
-*
+
 * Filter and plot using R
 
 * 
