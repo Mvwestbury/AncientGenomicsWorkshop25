@@ -186,6 +186,17 @@ Check for damage to see if it has worked (mapdamage output)
 
 
 # Task 4: Investigating biases
-Repeat with some individuals with simulated aDNA (important -checkBamHeaders 0)
+Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts. 
 
+
+# Software
+* Mapdamage https://ginolhac.github.io/mapDamage/
+* R
+* ANGSD https://github.com/ANGSD/angsd and https://www.popgen.dk/angsd/index.php/ANGSD
+* PCAngsd https://github.com/Rosemeis/pcangsd
+* Gargammel https://github.com/grenaud/gargammel
+* SAMtools https://github.com/samtools/samtools
+* Fastme http://www.atgc-montpellier.fr/fastme/binaries.php
+* Fastp - https://github.com/OpenGene/fastp
+* BWA - https://github.com/lh3/bwa
 
