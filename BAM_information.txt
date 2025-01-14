@@ -1,20 +1,20 @@
 ID	Species	Coverage	Spotted map	Striped map	
-793	Spotted hyena	5.60	Spotted_map_bams/793_map_merged_sort_RG_Hi1.bam	Striped_map_bams/793_map_merged_sort_RG.bam	2
-801	Spotted hyena	5.04	Spotted_map_bams/801_map_merged_sort_RG_Hi1.bam	Striped_map_bams/801_map_merged_sort_RG.bam	2
-815	Spotted hyena	4.65	Spotted_map_bams/815_map_merged_sort_RG_Hi1.bam	Striped_map_bams/815_map_merged_sort_RG.bam	2
-1979	Spotted hyena	5.89	Spotted_map_bams/1979_map_merged_sort_RG_Hi1.bam	Striped_map_bams/1979_map_merged_sort_RG.bam	2
-2518	Spotted hyena	3.87	Spotted_map_bams/2518_map_merged_sort_RG_Hi1.bam	Striped_map_bams/2518_map_merged_sort_RG.bam	2
-4035	Spotted hyena	1.78	Spotted_map_bams/4035_map_merged_sort_RG_Hi1.bam	Striped_map_bams/4035_map_merged_sort_RG.bam	2
-5695	Spotted hyena	2.38	Spotted_map_bams/5695_map_merged_sort_RG_Hi1.bam	Striped_map_bams/5695_map_merged_sort_RG.bam	2
+793	Spotted hyena	5.60	Spotted_map_bams/793_map_merged_sort_RG_Hi1.bam	Striped_map_bams/793_map_merged_sort_RG.bam
+801	Spotted hyena	5.04	Spotted_map_bams/801_map_merged_sort_RG_Hi1.bam	Striped_map_bams/801_map_merged_sort_RG.bam
+815	Spotted hyena	4.65	Spotted_map_bams/815_map_merged_sort_RG_Hi1.bam	Striped_map_bams/815_map_merged_sort_RG.bam
+1979	Spotted hyena	5.89	Spotted_map_bams/1979_map_merged_sort_RG_Hi1.bam	Striped_map_bams/1979_map_merged_sort_RG.bam
+2518	Spotted hyena	3.87	Spotted_map_bams/2518_map_merged_sort_RG_Hi1.bam	Striped_map_bams/2518_map_merged_sort_RG.bam
+4035	Spotted hyena	1.78	Spotted_map_bams/4035_map_merged_sort_RG_Hi1.bam	Striped_map_bams/4035_map_merged_sort_RG.bam
+5695	Spotted hyena	2.38	Spotted_map_bams/5695_map_merged_sort_RG_Hi1.bam	Striped_map_bams/5695_map_merged_sort_RG.bam
 Aardwolf	Aardwolf	29.23	Spotted_map_bams/Aardwolf_map_merged_sort_RG_Hi1.bam	NA	
-Ccsp014	Cave hyena	0.54	Spotted_map_bams/Ccsp014.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp014.rmdup.sort_RG.bam	1
-Ccsp015	Cave hyena	0.11	Spotted_map_bams/Ccsp015.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp015.rmdup.sort_RG.bam	1
-Ccsp026	Cave hyena	0.14	Spotted_map_bams/Ccsp026.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp026.rmdup.sort_RG.bam	1
-Ccsp040	Cave hyena	3.31	Spotted_map_bams/Ccsp040.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp040.rmdup.sort_RG.bam	1
-Ccsp041	Cave hyena	3.25	Spotted_map_bams/Ccsp041.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp041.rmdup.sort_RG.bam	1
-Ccsp042	Cave hyena	2.08	Spotted_map_bams/Ccsp042.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp042.rmdup.sort_RG.bam	1
-Ccsp043	Cave hyena	1.47	Spotted_map_bams/Ccsp043.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp043.rmdup.sort_RG.bam	1
-Ghana_crocuta	Spotted hyena	34.16	Spotted_map_bams/Ghana_crocuta_map_merged_sort_RG_Hi1.bam	Striped_map_bams/Ghana_crocuta_map_merged_sort_RG.bam	2
-NamCrocuta	Spotted hyena	34.65	Spotted_map_bams/NamCrocuta_map_merged_sort_RG_Hi1.bam	Striped_map_bams/NamCrocuta_map_merged_sort_RG.bam	2
-Somalia_crocuta	Spotted hyena	47.59	Spotted_map_bams/Somalia_crocuta_map_merged_sort_RG_Hi1.bam	Striped_map_bams/Somalia_crocuta_map_merged_sort_RG.bam	2
+Ccsp014	Cave hyena	0.54	Spotted_map_bams/Ccsp014.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp014.rmdup.sort_RG.bam
+Ccsp015	Cave hyena	0.11	Spotted_map_bams/Ccsp015.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp015.rmdup.sort_RG.bam
+Ccsp026	Cave hyena	0.14	Spotted_map_bams/Ccsp026.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp026.rmdup.sort_RG.bam
+Ccsp040	Cave hyena	3.31	Spotted_map_bams/Ccsp040.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp040.rmdup.sort_RG.bam
+Ccsp041	Cave hyena	3.25	Spotted_map_bams/Ccsp041.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp041.rmdup.sort_RG.bam
+Ccsp042	Cave hyena	2.08	Spotted_map_bams/Ccsp042.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp042.rmdup.sort_RG.bam
+Ccsp043	Cave hyena	1.47	Spotted_map_bams/Ccsp043.rmdup.sort_RG_Hi1.bam	Striped_map_bams/Ccsp043.rmdup.sort_RG.bam
+Ghana_crocuta	Spotted hyena	34.16	Spotted_map_bams/Ghana_crocuta_map_merged_sort_RG_Hi1.bam	Striped_map_bams/Ghana_crocuta_map_merged_sort_RG.bam
+NamCrocuta	Spotted hyena	34.65	Spotted_map_bams/NamCrocuta_map_merged_sort_RG_Hi1.bam	Striped_map_bams/NamCrocuta_map_merged_sort_RG.bam
+Somalia_crocuta	Spotted hyena	47.59	Spotted_map_bams/Somalia_crocuta_map_merged_sort_RG_Hi1.bam	Striped_map_bams/Somalia_crocuta_map_merged_sort_RG.bam
 Striped_hyena_	Striped hyena	34.86	Spotted_map_bams/Striped_hyena_map_merged_sort_RG_Hi1.bam	Striped_map_bams/Striped_hyena_map_merged_sort_RG.bam	
