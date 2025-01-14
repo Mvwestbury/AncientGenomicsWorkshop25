@@ -8,6 +8,7 @@ In this exercise we will be covering some analyses of palaeogenomic data, how to
   - “Reference_genomes” - reference genomes
   - “Spotted_map_bams” - Files mapped to the spotted hyena
   - “Striped_map_bams” - Files mapped to the striped hyena
+- Sample information can be found in "BAM_information.txt" on this Github
 - Spotted and Cave hyena data are from https://doi.org/10.1126/sciadv.aay0456
 - Striped hyena is from https://doi.org/10.1093/molbev/msy037
 - Aardwolf is from https://doi.org/10.1093/molbev/msab055
@@ -79,6 +80,7 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 
 
 ### Pairwise distances/phylogenetic trees (NJ)
+Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix output with the above command. You can also rerun the command but with an outgroup in the bamfile if you want to construct a rooted tree
 * Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile`
 
 * Convert distance matrix into newick file using FASTME
