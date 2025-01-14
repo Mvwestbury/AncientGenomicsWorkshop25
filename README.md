@@ -199,9 +199,9 @@ Check for damage to see if it has worked (mapdamage output)
 
 # Task 4: Investigating biases
 Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts. 
-```diff
-+ **Question:** Do the results change if we replace the high quality modern individual with a low quality ancient equivalent?
-```
+
+**Question:** Do the results change if we replace the high quality modern individual with a low quality ancient equivalent?
+
 # Software
 * Mapdamage https://ginolhac.github.io/mapDamage/
 * R
