@@ -147,10 +147,14 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 `angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -r HiC_scaffold_1`
 `gunzip NamCrocuta.fa.gz`
 * Prepare directories for gargammel
+
 `mkdir Sequences`
+
 `cd Sequences/`
+
 Make three directories “bact” “cont” “endo” and put the gunzipped fasta file in the endo folder. Index the fasta file using samtools faidx file.fasta
 `mkdir bact cont endo`
+
 Put the genome into the "endo" directory and index it
 `cp NamCrocuta.fa endo`
 `samtools faidx NamCrocuta.fa`
