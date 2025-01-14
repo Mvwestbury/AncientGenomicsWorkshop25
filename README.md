@@ -31,12 +31,12 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 ### Question: Which of these individuals is modern and which is ancient? How do you know?
 
 # Task 2: Population genomic analyses
-Note: It can take awhile to run so while plotting the first outputs make sure the others are running in the background
+**Note:** It can take awhile to run so while plotting the first outputs make sure the others are running in the background
 
 ## Run analyses to infer population structure
 ### PCA (GL and pseudo haploid base call)
-* Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt below)
-* Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls - This example applies filters I commonly use, if you want to know what all filters mean they are listed in the .arg file output after running the command
+* Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt)
+* Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command**
   
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -r HiC_scaffold_1 -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta`
 
@@ -98,5 +98,11 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
   
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
+* You can filter the results using AWK
+*   Only consider relevant topologies
+`awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_aardwolfH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 5 | less`
+*
 * Filter and plot using R
+
+* 
 
