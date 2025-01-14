@@ -81,7 +81,9 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 ### Pairwise distances/phylogenetic trees (NJ)
 * Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile`
 
-* Convert distance matrix into newick file using FASTME `fastme -i Spottedmap_minind11.infile -o Spottedmap_minind11.tree`
+* Convert distance matrix into newick file using FASTME
+
+`fastme -i Spottedmap_minind11.infile -o Spottedmap_minind11.tree`
 
 * The output "Spottedmap_minind11.tree" can then be visualised with your favourite tree visualisation tool (e.g. figtree)
 
@@ -103,6 +105,8 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 2. Flip H1 and H2 if negative for easier comparisons
 
 `awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_aardwolfH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 5 | less`
+
+### Question: Which individuals have the most gene flow? Which have the least (remember ABBA-BABA / ABBA+BABA so positive = more ABBA) 
 
 * If comparing between methods, you can also filter and plot using R
 ```R
@@ -140,6 +144,7 @@ plot(combined_data$AardwolfH4_Z,combined_data$StripedH4_Z)
 ## Add a 1:1 line to represent unbiased results
 abline(0,1,col=2)
 ```
+### Question: Do different outgroups give different D or Z values? What about different mapping references
 
 # Task 3: Ancient DNA simulation
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
