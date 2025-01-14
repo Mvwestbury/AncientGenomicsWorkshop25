@@ -29,7 +29,7 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 `mapDamage -i 4035_map_merged_sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta -d Results/4035_mapdamage --downsample 1000000`
 - Look at the output plots of main interest - Fragmisincorporation_plot.pdf + Length_plot.pdf
 
-### Question: Which of these individuals is modern and which is ancient? How do you know?
+**Question:** Which of these individuals is modern and which is ancient? How do you know?
 
 # Task 2: Population genomic analyses
 Here we will use some commonly implemented approaches in ancient population genomics that are suitable for low coverage data
@@ -92,7 +92,7 @@ Here we will build an unrooted neighbour joining phylogenetic tree from the dist
 
 * The output "Spottedmap_minind11.tree" can then be visualised with your favourite tree visualisation tool (e.g. figtree)
 
-### Question: Is there structure in this dataset? Are there differences between the base call methods?
+**Question:** Is there structure in this dataset? Are there differences between the base call methods?
 
 ## Run analysis to infer gene flow (D-statistics)
 This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)
@@ -111,7 +111,7 @@ This requires a new bamlist with the outgroup at the bottom (either striped hyen
 
 `awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_aardwolfH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 5 | less`
 
-### Question: Which individuals have the most gene flow? Which have the least (remember ABBA-BABA / ABBA+BABA so positive = more ABBA) 
+**Question:** Which individuals have the most gene flow? Which have the least (remember ABBA-BABA / ABBA+BABA so positive = more ABBA) 
 
 * If comparing between methods, you can also filter and plot using R
 ```R
@@ -149,7 +149,7 @@ plot(combined_data$AardwolfH4_Z,combined_data$StripedH4_Z)
 ## Add a 1:1 line to represent unbiased results
 abline(0,1,col=2)
 ```
-### Question: Do different outgroups give different D or Z values? What about different mapping references
+**Question:** Do different outgroups give different D or Z values? What about different mapping references
 
 # Task 3: Ancient DNA simulation
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
@@ -200,6 +200,7 @@ Check for damage to see if it has worked (mapdamage output)
 # Task 4: Investigating biases
 Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts. 
 
+**Question:** Do the results change if we replace the high quality modern individual with a low quality ancient equivalent?
 
 # Software
 * Mapdamage https://ginolhac.github.io/mapDamage/
