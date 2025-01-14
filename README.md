@@ -32,6 +32,7 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 ### Question: Which of these individuals is modern and which is ancient? How do you know?
 
 # Task 2: Population genomic analyses
+Here we will use some commonly implemented approaches in ancient population genomics that are suitable for low coverage data
 **Note:** It can take awhile to run so while plotting the first outputs make sure the others are running in the background
 
 ## Run analyses to infer population structure
@@ -94,7 +95,7 @@ Here we will build an unrooted neighbour joining phylogenetic tree from the dist
 ### Question: Is there structure in this dataset? Are there differences between the base call methods?
 
 ## Run analysis to infer gene flow (D-statistics)
-* This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)
+This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)
 
 * Compute Dstatistics in 1Mb blocks using a random base call approach in ANGSD
 
@@ -142,9 +143,9 @@ filtered_data2 <- data2[grepl("Spot", data1[,1], ignore.case = TRUE) &
 ## Combine the data
 combined_data <- cbind(filtered_data1, filtered_data2)
 
-head(combined_data)
-
+## Do a basic plot between the two datasets (Make it look nice if you like)
 plot(combined_data$AardwolfH4_Z,combined_data$StripedH4_Z)
+
 ## Add a 1:1 line to represent unbiased results
 abline(0,1,col=2)
 ```
