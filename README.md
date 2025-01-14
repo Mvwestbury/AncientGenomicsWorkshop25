@@ -106,7 +106,6 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 
 * If comparing between methods, you can also filter and plot using R
 ```R
-### Dstats
 # Load the data from each file
 data1 <- read.table("Spottedmap_minind11_aardwolfH4.jack.txt", header = TRUE, sep = "\t")
 data2 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
@@ -140,5 +139,36 @@ head(combined_data)
 plot(combined_data$AardwolfH4_Z,combined_data$StripedH4_Z)
 ## Add a 1:1 line to represent unbiased results
 abline(0,1,col=2)
-``` 
+```
+
+# Task 3: Ancient DNA simulation
+In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
+* Build fasta using consensus base call in ANGSD and unzip it
+`angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -r HiC_scaffold_1`
+`gunzip NamCrocuta.fa.gz`
+* Prepare directories for gargammel
+`mkdir Sequences`
+`cd Sequences/`
+Make three directories “bact” “cont” “endo” and put the gunzipped fasta file in the endo folder. Index the fasta file using samtools faidx file.fasta
+`mkdir bact cont endo`
+Put the genome into the "endo" directory and index it
+`cp NamCrocuta.fa endo`
+`samtools faidx NamCrocuta.fa`
+Create a txt file with the proportion of each fragment lengths based on the mapdamage read lengths from your empirical data (file lgdistribution.txt in the mapdamage output directory):  `awk '/\+/{sum+=$3; count[$2]+=$3} END{for (i in count) print i"\t"count[i]/sum}' lgdistribution.txt > Fragment_lengths.txt`
+* Run gargammel
+`gargammel -h`
+`gargammel -c 1 --comp 0,0,1 -f /home/zhc860/data/Cave_hyena/Workshop/Results/Ccsp015_mapdamage/Fragment_lengths.txt -mapdamage /home/zhc860/data/Cave_hyena/Workshop/Results/Ccsp015_mapdamage/misincorporation.txt single -rl 80 -o NamCroc.damaged Sequences`
+The paired end output fastq of interest will end in _s1.fq.gz _s2.fq.gz
+
+* Map reads using the script availabe in this github 
+`Ancient_mapping_PE.sh 3 . NamCroc Mapping ../Crocuta_scaffold1.fasta 30 0.01`	
+Check for damage (mapdamage output)
+* Downsample and index final bam file
+`samtools view -s 0.2 -o NamCroc.rmdup.sort_RG_0.2.bam NamCroc.rmdup.sort_RG.bam`
+`samtools index NamCroc.rmdup.sort_RG.bam`
+
+
+# Task 4: Investigating biases
+Repeat with some individuals with simulated aDNA (important -checkBamHeaders 0)
+
 
