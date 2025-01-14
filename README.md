@@ -39,7 +39,8 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 * Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt)
 * Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command**
   
-`angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -r HiC_scaffold_1 -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta`
+`angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref References/Crocuta/GWHAZPN00000000.genome_HiC.fasta`
+If you are changing between references/datasets, pay specific attention to the -rf -ref -b -out commands
 
 * Use PCANGSD to computed a covariance matrix from the GL
 
