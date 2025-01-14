@@ -144,7 +144,9 @@ abline(0,1,col=2)
 # Task 3: Ancient DNA simulation
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
 * Build fasta using consensus base call in ANGSD and unzip it
+
 `angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -r HiC_scaffold_1`
+
 `gunzip NamCrocuta.fa.gz`
 * Prepare directories for gargammel inlcuding three directories “bact” “cont” “endo” 
 
