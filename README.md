@@ -4,9 +4,9 @@ In this exercise we will be covering some analyses of palaeogenomic data, how to
  - Data needed for this exercise can be downloaded from …
  - Within this you will find:
   - “Results” - Example results from different tasks
-“Reference_genomes” - reference genomes
-“Spotted_map_bams” - Files mapped to the spotted hyena
-“Striped_map_bams” - Files mapped to the striped hyena
-Spotted and Cave hyena data are from https://doi.org/10.1126/sciadv.aay0456
-Striped hyena is from https://doi.org/10.1093/molbev/msy037
-Aardwolf is from https://doi.org/10.1093/molbev/msab055
+  - “Reference_genomes” - reference genomes
+  - “Spotted_map_bams” - Files mapped to the spotted hyena
+  - “Striped_map_bams” - Files mapped to the striped hyena
+ - Spotted and Cave hyena data are from https://doi.org/10.1126/sciadv.aay0456
+ - Striped hyena is from https://doi.org/10.1093/molbev/msy037
+ - Aardwolf is from https://doi.org/10.1093/molbev/msab055
