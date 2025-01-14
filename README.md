@@ -15,6 +15,8 @@ In this exercise we will be covering some analyses of palaeogenomic data, how to
 
 **Note**: Analyses can take some time to run so I recommend starting the subsequent analyses while plotting up results
 
+
+
 # Task 1: Identification of aDNA damage using mapdamage
 The most common approach to infer aDNA damage patterns is to use Mapdamage https://ginolhac.github.io/mapDamage/
 - See what the possible parameters are
@@ -30,6 +32,8 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 - Look at the output plots of main interest - Fragmisincorporation_plot.pdf + Length_plot.pdf
 
 **Question:** Which of these individuals is modern and which is ancient? How do you know?
+
+
 
 # Task 2: Population genomic analyses
 Here we will use some commonly implemented approaches in ancient population genomics that are suitable for low coverage data
@@ -151,6 +155,8 @@ abline(0,1,col=2)
 ```
 **Question:** Do different outgroups give different D or Z values? What about different mapping references
 
+
+
 # Task 3: Ancient DNA simulation
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
 * Build fasta using consensus base call in ANGSD and unzip it
@@ -197,10 +203,14 @@ Check for damage to see if it has worked (mapdamage output)
 `samtools index NamCroc.rmdup.sort_RG.bam`
 
 
+
 # Task 4: Investigating biases
 Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts. 
 
 **Question:** Do the results change if we replace the high quality modern individual with a low quality ancient equivalent?
+
+
+
 
 # Software
 * Mapdamage https://ginolhac.github.io/mapDamage/
