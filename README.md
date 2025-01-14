@@ -88,6 +88,7 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 
 ## Run analysis to infer gene flow (D-statistics)
 * This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)
+
 * Compute Dstatistics in 1Mb blocks using a random base call approach in ANGSD
 
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref ../../../Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
@@ -95,4 +96,6 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 * Perform block jacknifing with the R script as part of the ANGSD toolsuite
   
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
+
+* Filter and plot using R
 
