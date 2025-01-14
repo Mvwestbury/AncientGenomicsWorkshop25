@@ -32,17 +32,16 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 # Task 2: Population genomic analyses
 Note: It can take awhile to run so while plotting the first outputs make sure the others are running in the background
 
-### Preparation 
-* Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt below)
-
 ## Run analyses to infer population structure
 ### PCA (GL and pseudo haploid base call)
-  
-* Performed genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls - This example applies filters I commonly use, if you want to know what all filters mean they are listed in the .arg file output after running the command
+* Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt below)
+* Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls - This example applies filters I commonly use, if you want to know what all filters mean they are listed in the .arg file output after running the command
   
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -r HiC_scaffold_1 -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta`
 
-* Use PCANGSD to computed a covariance matrix from the GL `pcangsd -b Spottedmap_minind11.beagle.gz -t 2 -o Spottedmap_minind11_pcangsd`
+* Use PCANGSD to computed a covariance matrix from the GL
+
+`pcangsd -b Spottedmap_minind11.beagle.gz -t 2 -o Spottedmap_minind11_pcangsd`
 
 * Plot the covariance matrices using R
 
@@ -83,12 +82,17 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 
 * Convert distance matrix into newick file using FASTME `fastme -i Spottedmap_minind11.infile -o Spottedmap_minind11.tree`
 
-* The output can then be visualised with your favourite tree visualisation tool (e.g. figtree)
+* The output "Spottedmap_minind11.tree" can then be visualised with your favourite tree visualisation tool (e.g. figtree)
 
 ### Question: Is there structure in this dataset? Are there differences between the base call methods?
 
 ## Run analysis to infer gene flow (D-statistics)
+* This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)
+* Compute Dstatistics in 1Mb blocks using a random base call approach in ANGSD
+
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref ../../../Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
 
+* Perform block jacknifing with the R script as part of the ANGSD toolsuite
+  
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
