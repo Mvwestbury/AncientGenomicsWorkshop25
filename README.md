@@ -172,11 +172,16 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 
 The paired end output fastq of interest will end in _s1.fq.gz _s2.fq.gz
 
-* Map reads using the script availabe in this github 
+* Map reads using the script availabe in this github
+
 `Ancient_mapping_PE.sh 3 . NamCroc Mapping ../Crocuta_scaffold1.fasta 30 0.01`	
-Check for damage (mapdamage output)
+
+Check for damage to see if it has worked (mapdamage output)
+
 * Downsample and index final bam file
+
 `samtools view -s 0.2 -o NamCroc.rmdup.sort_RG_0.2.bam NamCroc.rmdup.sort_RG.bam`
+
 `samtools index NamCroc.rmdup.sort_RG.bam`
 
 
