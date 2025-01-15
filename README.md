@@ -48,13 +48,13 @@ Here we will use some commonly implemented approaches in ancient population geno
 
 **Note:** If you are changing between references/datasets, pay specific attention to the `-rf` (scaffold list) `-ref` (reference fasta) `-b` (bamlist) `-out` (output prefix) parameters
 
-* Use PCANGSD to computed a covariance matrix from the GL
+* Use PCANGSD to compute a covariance matrix from the GL beagle file
 
 `pcangsd -b Spottedmap_minind11.beagle.gz -t 2 -o Spottedmap_minind11_pcangsd`
 
 * Plot the covariance matrices using R
 
-  Example
+  Example plotting code
 
 ```R
 # Import the covariance matrix (either -covMat for pseudohaploid or .cov for GL)
