@@ -210,9 +210,11 @@ Parameters are:
 ## $7 - Mismatch parameter
 ```
 
-Check for damage to see if it has worked (mapdamage output)
+* Check the "records" file to see how many reads mapped, average coverage, and the number of bp that mapped
 
-* Downsample and index final bam file
+* Check for damage to see if it has worked (mapdamage output)
+
+* Downsample and index the final bam file to similar coverage to the lowest coverage ancient sample
 
 `samtools view -s 0.2 -o NamCroc.rmdup.sort_RG_0.2.bam NamCroc.rmdup.sort_RG.bam`
 
