@@ -46,7 +46,7 @@ Here we will use some commonly implemented approaches in ancient population geno
   
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref References/Crocuta/GWHAZPN00000000.genome_HiC.fasta`
 
-**Note:** If you are changing between references/datasets, pay specific attention to the `-rf` (scaffold list) `-ref` (reference file) `-b` (bamlist) `-out` (output prefix) parameters
+**Note:** If you are changing between references/datasets, pay specific attention to the `-rf` (scaffold list) `-ref` (reference fasta) `-b` (bamlist) `-out` (output prefix) parameters
 
 * Use PCANGSD to computed a covariance matrix from the GL
 
