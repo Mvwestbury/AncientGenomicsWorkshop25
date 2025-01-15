@@ -13,7 +13,7 @@ In this exercise we will be covering some analyses of palaeogenomic data, how to
 - Striped hyena is from https://doi.org/10.1093/molbev/msy037
 - Aardwolf is from https://doi.org/10.1093/molbev/msab055
 
-**Note**: Analyses can take some time to run so I recommend starting the subsequent analyses while plotting up results
+**Note**: Analyses can take some time to run so I recommend starting the subsequent analyses while plotting results
 
 
 
