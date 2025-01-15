@@ -197,16 +197,18 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 The paired end output fastq of interest will end in _s1.fq.gz _s2.fq.gz
 
 * Map reads using the "Ancient_mapping_PE.sh" script availabe in this github
+```
+Ancient_mapping_PE.sh 3 . NamCroc Mapping ../Crocuta_scaffold1.fasta 30 0.01
 
-`Ancient_mapping_PE.sh 3 . NamCroc Mapping ../Crocuta_scaffold1.fasta 30 0.01
-
+Parameters are:
 ## $1 - Threads
 ## $2 - Raw reads folder
 ## $3 - Code name for sample
 ## $4 - Results folder
-## $5 - Reference
+## $5 - Reference fasta
 ## $6 - Minimum read length
-## $7 - Mismatch parameter`	
+## $7 - Mismatch parameter
+```
 
 Check for damage to see if it has worked (mapdamage output)
 
