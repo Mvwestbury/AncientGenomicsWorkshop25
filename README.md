@@ -223,7 +223,7 @@ Parameters are:
 
 
 # Task 4: Investigating biases
-Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts. 
+Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts in the bamlist. 
 
 **Question:** Do the results change if we replace the high quality modern individual with a low quality ancient equivalent?
 
