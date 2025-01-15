@@ -34,7 +34,7 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 - Look at the output plots of main interest
   - Fragmisincorporation_plot.pdf + Length_plot.pdf
 
-**Question:** Which of these individuals is modern and which is ancient? How do you know?
+**Task 1 Question:** Which of these individuals is modern and which is ancient? How do you know?
 
 
 
@@ -94,6 +94,7 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 ### Pairwise distances/phylogenetic trees (NJ)
 Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix (.ibsMat) output with the above command. You can also rerun the command but with an outgroup in the bamfile if you want to construct a rooted tree
 * Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top
+
 e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile`
 
 * Convert distance matrix into newick file using FASTME
@@ -102,7 +103,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 
 * The output "Spottedmap_minind11.tree" can then be visualised with your favourite tree visualisation tool (e.g. figtree)
 
-**Question:** Is there structure in this dataset? Are there differences between the PCA base call methods?
+**Task 2 Question:** Is there structure in this dataset? Are there differences between the PCA base call methods?
 
 ## Run analysis to infer gene flow (D-statistics)
 This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)
@@ -111,17 +112,18 @@ This requires a new bamlist with the outgroup at the bottom (either striped hyen
 
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref ../../../Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
 
+* Create a text file containing a list of IDs for all individuals apart from the outgroup (Dstats_names.txt) -- For easier filtering I add a population identifier before the name e.g. Cave and Spot
 * Perform block jacknifing with the R script as part of the ANGSD toolsuite
   
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
-* You can filter the results using AWK
+* If you have added a population identifier you can filter the results using AWK
 1. Only consider relevant topologies ((Cave,Cave),Spotted)
-2. Flip H1 and H2 if negative for easier comparisons
+2. If the results are negative, flip the H1 and H2 individuals to make it positive for easier comparisons
 
-`awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_aardwolfH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 5 | less`
+`awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_stripedH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 5 | less`
 
-**Question:** Which individuals have the most gene flow? Which have the least (remember ABBA-BABA / ABBA+BABA so positive = more ABBA) 
+**Question:** Which individuals have the most gene flow? Which have the least? (remember ABBA-BABA / ABBA+BABA so positive = more ABBA) 
 
 * If comparing between methods, you can also filter and plot using R
 ```R
@@ -167,10 +169,10 @@ abline(0,1,col=2)
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
 * Build fasta using consensus base call in ANGSD and unzip it
 
-`angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -r HiC_scaffold_1`
+`angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -rf ../../../Reference_genomes/Crocuta_scaffold1.txt`
 
 `gunzip NamCrocuta.fa.gz`
-* Prepare directories for gargammel inlcuding three directories “bact” “cont” “endo” 
+* Prepare directories for gargammel including three directories “bact” “cont” “endo” 
 
 `mkdir Sequences`
 
@@ -178,27 +180,33 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 
 `mkdir bact cont endo`
 
-* Put the genome into the "endo" directory and index it
+* Put the fasta you created above into the "endo" directory and index it using SAMtools
 
 `cp NamCrocuta.fa endo`
 
 `samtools faidx NamCrocuta.fa`
 
-* Create a txt file with the proportion of each fragment lengths based on the mapdamage read lengths from your empirical data (file lgdistribution.txt in the mapdamage output directory):
+* Create a txt file with the proportion of each fragment length based on the mapdamage read lengths from your empirical data (file lgdistribution.txt in the mapdamage output directory):
 
 `awk '/\+/{sum+=$3; count[$2]+=$3} END{for (i in count) print i"\t"count[i]/sum}' lgdistribution.txt > Fragment_lengths.txt`
 
-* Run gargammel
-
-`gargammel -h`
+* Run gargammel -- for a list of parameters type `gargammel -h`
 
 `gargammel -c 1 --comp 0,0,1 -f /home/zhc860/data/Cave_hyena/Workshop/Results/Ccsp015_mapdamage/Fragment_lengths.txt -mapdamage /home/zhc860/data/Cave_hyena/Workshop/Results/Ccsp015_mapdamage/misincorporation.txt single -rl 80 -o NamCroc.damaged Sequences`
 
 The paired end output fastq of interest will end in _s1.fq.gz _s2.fq.gz
 
-* Map reads using the script availabe in this github
+* Map reads using the "Ancient_mapping_PE.sh" script availabe in this github
 
-`Ancient_mapping_PE.sh 3 . NamCroc Mapping ../Crocuta_scaffold1.fasta 30 0.01`	
+`Ancient_mapping_PE.sh 3 . NamCroc Mapping ../Crocuta_scaffold1.fasta 30 0.01
+
+## $1 - Threads
+## $2 - Raw reads folder
+## $3 - Code name for sample
+## $4 - Results folder
+## $5 - Reference
+## $6 - Minimum read length
+## $7 - Mismatch parameter`	
 
 Check for damage to see if it has worked (mapdamage output)
 
