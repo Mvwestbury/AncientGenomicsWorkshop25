@@ -29,8 +29,10 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
   - Example individual - **4035**
 
 `mapDamage -i 4035_map_merged_sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta -d Results/4035_mapdamage --downsample 1000000`
-- Output directory is defined by -d - In this example the results are found in "Results/Ccsp015_mapdamage"
-- Look at the output plots of main interest - Fragmisincorporation_plot.pdf + Length_plot.pdf
+- Output directory is defined by -d
+  - In this example the results are found in "Results/Ccsp015_mapdamage"
+- Look at the output plots of main interest
+  - Fragmisincorporation_plot.pdf + Length_plot.pdf
 
 **Question:** Which of these individuals is modern and which is ancient? How do you know?
 
@@ -46,6 +48,7 @@ Here we will use some commonly implemented approaches in ancient population geno
 * Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls in ANGSD - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command or visit the website https://www.popgen.dk/angsd/index.php/ANGSD**
   
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref References/Crocuta/GWHAZPN00000000.genome_HiC.fasta -checkbamheaders 0`
+
 You will get a few outputs of interest, they end in `.ibsMat` `.covMat` and `.beagle.gz`
 
 **Note:** If you are changing between references/datasets, pay specific attention to the `-rf` (scaffold list) `-ref` (reference fasta) `-b` (bamlist) `-out` (output prefix) parameters
@@ -54,12 +57,12 @@ You will get a few outputs of interest, they end in `.ibsMat` `.covMat` and `.be
 
 `pcangsd -b Spottedmap_minind11.beagle.gz -t 2 -o Spottedmap_minind11_pcangsd`
 
-* Plot the covariance matrices using R
+* Plot the covariance matrices using R (either ending in .covMat for pseudohaploid or .cov for GL)
 
   Example plotting code
 
 ```R
-# Import the covariance matrix (either -covMat for pseudohaploid or .cov for GL)
+# Import the covariance matrix (either .covMat for pseudohaploid or .cov for GL)
 e=eigen(as.matrix(read.table("Spottedmap_minind11.covMat")))
 
 # Extract eigenvalues
@@ -89,8 +92,9 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 
 
 ### Pairwise distances/phylogenetic trees (NJ)
-Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix output with the above command. You can also rerun the command but with an outgroup in the bamfile if you want to construct a rooted tree
-* Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile`
+Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix (.ibsMat) output with the above command. You can also rerun the command but with an outgroup in the bamfile if you want to construct a rooted tree
+* Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top
+e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile`
 
 * Convert distance matrix into newick file using FASTME
 
