@@ -25,10 +25,10 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 ### Run mapdamage (optimised for speed)
  * Example individual - **Ccsp015**
 
-`mapDamage -i Ccsp015.rmdup.sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta -d Results/Ccsp015_mapdamage --downsample 1000000`
+`mapDamage -i Spotted_map_bams/Ccsp015.rmdup.sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -d Results/Ccsp015_mapdamage --downsample 1000000`
   - Example individual - **4035**
 
-`mapDamage -i 4035_map_merged_sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r ~/data/References/Crocuta/GWHAZPN00000000.genome_HiC.fasta -d Results/4035_mapdamage --downsample 1000000`
+`mapDamage -i Spotted_map_bams/4035_map_merged_sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -d Results/4035_mapdamage --downsample 1000000`
 - Output directory is defined by -d
   - In this example the results are found in "Results/Ccsp015_mapdamage"
 - Look at the output plots of main interest
@@ -47,7 +47,7 @@ Here we will use some commonly implemented approaches in ancient population geno
 * Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt)
 * Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls in ANGSD - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command or visit the website https://www.popgen.dk/angsd/index.php/ANGSD**
   
-`angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref References/Crocuta/GWHAZPN00000000.genome_HiC.fasta -checkbamheaders 0`
+`angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -rf Reference_genomes/Crocuta_scaffold1.txt -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -checkbamheaders 0`
 
 You will get a few outputs of interest, they end in `.ibsMat` `.covMat` and `.beagle.gz`
 
@@ -110,7 +110,7 @@ This requires a new bamlist with the outgroup at the bottom (either striped hyen
 
 * Compute Dstatistics in 1Mb blocks using a random base call approach in ANGSD
 
-`angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf ../../../Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref ../../../Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
+`angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref ../../../Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
 
 * Create a text file containing a list of IDs for all individuals apart from the outgroup (Dstats_names.txt) -- For easier filtering I add a population identifier before the name e.g. Cave and Spot
 * Perform block jacknifing with the R script as part of the ANGSD toolsuite
