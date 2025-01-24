@@ -110,7 +110,7 @@ This requires a new bamlist with the outgroup at the bottom (either striped hyen
 
 * Compute Dstatistics in 1Mb blocks using a random base call approach in ANGSD
 
-`angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref ../../../Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
+`angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
 
 * Create a text file containing a list of IDs for all individuals apart from the outgroup (Dstats_names.txt) -- For easier filtering I add a population identifier before the name e.g. Cave and Spot
 * Perform block jacknifing with the R script as part of the ANGSD toolsuite
@@ -169,7 +169,7 @@ abline(0,1,col=2)
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
 * Build fasta using consensus base call in ANGSD and unzip it
 
-`angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -rf ../../../Reference_genomes/Crocuta_scaffold1.txt`
+`angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -rf Reference_genomes/Crocuta_scaffold1.txt`
 
 `gunzip NamCrocuta.fa.gz`
 * Prepare directories for gargammel including three directories “bact” “cont” “endo” 
@@ -192,13 +192,13 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 
 * Run gargammel -- for a list of parameters type `gargammel -h`
 
-`gargammel -c 1 --comp 0,0,1 -f /home/zhc860/data/Cave_hyena/Workshop/Results/Ccsp015_mapdamage/Fragment_lengths.txt -mapdamage /home/zhc860/data/Cave_hyena/Workshop/Results/Ccsp015_mapdamage/misincorporation.txt single -rl 80 -o NamCroc.damaged Sequences`
+`gargammel -c 1 --comp 0,0,1 -f Results/Ccsp015_mapdamage/Fragment_lengths.txt -mapdamage Results/Ccsp015_mapdamage/misincorporation.txt single -rl 80 -o NamCroc.damaged Sequences`
 
 The paired end output fastq of interest will end in _s1.fq.gz _s2.fq.gz
 
 * Map reads using the "Ancient_mapping_PE.sh" script availabe in this github
 ```
-Ancient_mapping_PE.sh 3 . NamCroc Mapping ../Crocuta_scaffold1.fasta 30 0.01
+Ancient_mapping_PE.sh 3 . NamCroc Mapping Reference_genomes/Crocuta_scaffold1.fasta 30 0.01
 
 Parameters are:
 ## $1 - Threads
