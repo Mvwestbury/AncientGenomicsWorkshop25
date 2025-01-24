@@ -2,7 +2,7 @@
 In this exercise we will be covering some analyses of palaeogenomic data, how to simulate ancient DNA data, and evaluate the influences of potential aDNA biases in our results. Specifically we will investigate the impact of reference genome selection, the quality of the data, and the base call approach used in PCA, Neighbour joining tree, and D-statistic analyses.
 
 ## Getting started
-- Data needed for this exercise can be downloaded using the command `wget -O AncientGenomicsWorkshop.tar.gz https://sid.erda.dk/share_redirect/CXPVd1DEeD` and unzipped using `tar -zxvf AncientGenomicsWorkshop.tar.gz`
+- Data needed for this exercise can be downloaded using the command `wget -O AncientGenomicsWorkshop.tar.gz https://sid.erda.dk/share_redirect/BifBEY0E0R` and unzipped using `tar -zxvf AncientGenomicsWorkshop.tar.gz`
 - Within this you will find:
   - “Results” - Example results from different tasks
   - “Reference_genomes” - reference genomes
