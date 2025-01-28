@@ -40,10 +40,11 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 
 # Task 2: Population genomic analyses
 Here we will use some commonly implemented approaches in ancient population genomics that are suitable for low coverage data
+
 **Note:** It can take awhile to run so while plotting the first outputs make sure the others are running in the background
 
 ## Run analyses to infer population structure
-### PCA (GL and pseudo haploid base call)
+### PCA (Genotype likelihoods and pseudo haploid base call)
 * Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt)
 * Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls in ANGSD - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command or visit the website https://www.popgen.dk/angsd/index.php/ANGSD**
   
