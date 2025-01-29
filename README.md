@@ -171,6 +171,8 @@ abline(0,1,col=2)
 
 # Task 3: Ancient DNA simulation
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
+
+**Note** This also takes awhile so output can be found in Results/Task3
 * Build fasta using consensus base call in ANGSD and unzip it
 
 `angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -rf Reference_genomes/Crocuta_scaffold1.txt`
@@ -178,15 +180,15 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 `gunzip NamCrocuta.fa.gz`
 * Prepare directories for gargammel including three directories “bact” “cont” “endo” 
 
-`mkdir Sequences`
+`mkdir NamCroc`
 
-`cd Sequences/`
+`cd NamCroc/`
 
 `mkdir bact cont endo`
 
 * Put the fasta you created above into the "endo" directory and index it using SAMtools
 
-`cp NamCrocuta.fa endo`
+`cp NamCrocuta.fa NamCroc/endo`
 
 `samtools faidx NamCrocuta.fa`
 
@@ -229,7 +231,9 @@ Parameters are:
 # Task 4: Investigating biases
 Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts in the bamlist. 
 
-You can simply plot the PCA and NJ tree as before and visually compare them
+Again, as the ANGSD commands take awhile to run, all results are found within Results/Task4 and are split between reference genomes - the file name notes which individual has been damaged and can open the Bamlist*txt files to see their position in the bamlist for later plotting
+
+You can simply plot the PCA and NJ tree as before and visually compare them - maybe change the shape or colour of the damaged individuals to make easier visualisation
 
 For the Dstatistics, you can compare results in a similar manner to above but only look at the comparisons compare the simulated damaged individual to its high quality equivalent
 ```R
