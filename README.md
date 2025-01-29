@@ -41,7 +41,7 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 # Task 2: Population genomic analyses
 Here we will use some commonly implemented approaches in ancient population genomics that are suitable for low coverage data
 
-**Note:** It can take awhile to run so while plotting the first outputs make sure the others are running in the background
+**Note:** As these take awhile to run, you can start running it but then cancel it with ctrl +c - All results needed can be found in the Results/Task2 directory. Results have been computed using two different reference genomes (Striped and Spotted hyena) and have been split into their own respective directories
 
 ## Run analyses to infer population structure
 ### PCA (Genotype likelihoods and pseudo haploid base call)
@@ -90,7 +90,6 @@ legend("top",labes,cex=1,col=c(1,2),pch=16,bty='n')
 #Print as PDF
 dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 ```
-
 
 ### Pairwise distances/phylogenetic trees (NJ)
 Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix (.ibsMat) output with the above command. You can also rerun the command but with an outgroup in the bamfile if you want to construct a rooted tree
@@ -232,7 +231,7 @@ You can simply plot the PCA and NJ tree as before and visually compare them
 
 For the Dstatistics, you can compare results in a similar manner to above but only look at the comparisons compare the simulated damaged individual to its high quality equivalent
 ```R
-# Load the data from each file
+# Load the data from each file (Change the data2 for some of the other jack.txt files)
 data1 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
 data2 <- read.table("Spottedmap_minind11_Namsim_stripedH4.jack.txt", header = TRUE, sep = "\t")
 
