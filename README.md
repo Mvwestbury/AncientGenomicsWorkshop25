@@ -103,7 +103,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 
 `fastme -i Spottedmap_minind11.infile -o Spottedmap_minind11.tree`
 
-* The output "Spottedmap_minind11.tree" can then be visualised with your favourite tree visualisation tool (e.g. figtree)
+* The output "Spottedmap_minind11.tree" can then be visualised with your favourite tree visualisation tool (e.g. figtree or online at https://phylo.io/)
 
 **Task 2 Question:** Is there structure in this dataset? Are there differences between the PCA base call methods?
 
