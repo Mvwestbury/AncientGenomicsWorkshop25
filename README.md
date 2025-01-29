@@ -153,6 +153,8 @@ filtered_data2 <- data2[grepl("Spot", data1[,1], ignore.case = TRUE) &
                           grepl("Spot", data1[,2], ignore.case = TRUE) & 
                           grepl("Cave", data1[,3], ignore.case = TRUE), ]
 
+## OR you can skip this filtering step and compare all results regardless of topology...
+
 ## Combine the data
 combined_data <- cbind(filtered_data1, filtered_data2)
 
@@ -215,16 +217,43 @@ Parameters are:
 
 * Check for damage to see if it has worked (mapdamage output)
 
-* Downsample and index the final bam file to similar coverage to the lowest coverage ancient sample
+* If you like, you can downsample and index the final bam file to similar coverage to the lowest coverage ancient sample
 
 `samtools view -s 0.2 -o NamCroc.rmdup.sort_RG_0.2.bam NamCroc.rmdup.sort_RG.bam`
 
-`samtools index NamCroc.rmdup.sort_RG.bam`
+`samtools index NamCroc.rmdup.sort_RG_0.2.bam`
 
 
 
 # Task 4: Investigating biases
 Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts in the bamlist. 
+
+You can simply plot the PCA and NJ tree as before and visually compare them
+
+For the Dstatistics, you can compare results in a similar manner to above but only look at the comparisons compare the simulated damaged individual to its high quality equivalent
+```R
+# Load the data from each file
+data1 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
+data2 <- read.table("Spottedmap_minind11_Namsim_stripedH4.jack.txt", header = TRUE, sep = "\t")
+
+# Prepend text to the headers of each data frame
+names(data1) <- paste("Original", names(data1), sep = "_")
+names(data2) <- paste("Simulated", names(data2), sep = "_")
+
+
+## Combine the data
+combined_data <- cbind(data1, data2)
+
+filtered_data <- combined_data[grepl("SIM", combined_data$Simulated_H1) | 
+                          grepl("SIM", combined_data$Simulated_H2) | 
+                          grepl("SIM", combined_data$Simulated_H3), ]
+
+## Do a basic plot between the two datasets (Make it look nice if you like)
+plot(filtered_data$Original_D,filtered_data$Simulated_D)
+
+## Add a 1:1 line to represent unbiased results
+abline(0,1,col=2)
+```
 
 **Question:** Do the results change if we replace the high quality modern individual with a low quality ancient equivalent?
 
