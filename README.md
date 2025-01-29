@@ -92,7 +92,9 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 ```
 
 ### Pairwise distances/phylogenetic trees (NJ)
-Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix (.ibsMat) output with the above command. You can also rerun the command but with an outgroup in the bamfile if you want to construct a rooted tree
+Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix (.ibsMat) output with the above command. This runs quickly so you can run it yourself
+You can also rerun the command but with an outgroup in the bamfile if you want to construct a rooted tree
+
 * Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top
 
 e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile`
