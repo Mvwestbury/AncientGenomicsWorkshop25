@@ -216,7 +216,7 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 
 The paired end output fastq of interest will end in _s1.fq.gz _s2.fq.gz
 
-* Map reads using the "Ancient_mapping_PE.sh" script availabe in this github **- RUN BUT CANCEL (TAKES TOO LONG)**
+* Map reads using the "Ancient_mapping_PE.sh" script availabe in this github or downloaded with `wget -O Ancient_mapping_PE.sh https://sid.erda.dk/share_redirect/aevNt5UxQG` **- RUN BUT CANCEL (TAKES TOO LONG)**
 ```
 Ancient_mapping_PE.sh 3 . NamCroc Mapping Reference_genomes/Crocuta_scaffold1.fasta 30 0.01
 
