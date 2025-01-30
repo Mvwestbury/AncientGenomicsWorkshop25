@@ -277,7 +277,7 @@ plot(filtered_data$Original_Dstat,filtered_data$Simulated_Dstat)
 abline(0,1,col=2)
 ```
 
-**Question:** Do the results change if we replace the high quality modern individual with a low quality ancient equivalent?
+**Question:** Do the results change if we replace the high quality modern individual with a low quality ancient equivalent? And what about if you change the reference genome?
 
 
 
