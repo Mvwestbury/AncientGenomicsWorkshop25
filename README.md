@@ -41,12 +41,13 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 # Task 2: Population genomic analyses
 Here we will use some commonly implemented approaches in ancient population genomics that are suitable for low coverage data
 
-**Note:** As these take awhile to run, you can start running it but then cancel it with ctrl +c - All results needed can be found in the Results/Task2 directory. Results have been computed using two different reference genomes (Striped and Spotted hyena) and have been split into their own respective directories
+**Note:** As these take awhile to run, you can start running it but then cancel it with ctrl +c 
+**All results needed can be found in the Results/Task2 directory. Results have been computed using two different reference genomes (Striped and Spotted hyena) and have been split into their own respective directories**
 
-## Run analyses to infer population structure - Output files can be found in ~/workshop_materials/31_ancient_genomics/Results/Task2
+## Run analyses to infer population structure
 
 ### PCA (Genotype likelihoods and pseudo haploid base call) - RUN BUT CANCEL (TAKES TOO LONG)
-* Make a text file with a list of the bam files you want to use (e.g. ls /home/wpsg/workshop_materials/31_ancient_genomics/Spotted_map_bams/*bam > Bamlist.txt **make sure to remove outgroup bams (Aardwolf_map_merged_sort_RG_Hi1.bam and Striped_hyena_map_merged_sort_RG_Hi1.bam) if not necessary **)
+* Make a text file with a list of the bam files you want to use (e.g. ls /home/wpsg/workshop_materials/31_ancient_genomics/Spotted_map_bams/*bam > Bamlist.txt **make sure to remove outgroup bams (Aardwolf_map_merged_sort_RG_Hi1.bam and Striped_hyena_map_merged_sort_RG_Hi1.bam) if not necessary**)
 * You can also make one more manually using the BAM_information.txt from this Github
 * Make all Bamlist files necessary (Mapped to Spotted hyena, Mapped to Striped hyena, with and without outgroups)
 * Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls in ANGSD - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command or visit the website https://www.popgen.dk/angsd/index.php/ANGSD**
@@ -111,7 +112,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 
 * The output "Spottedmap_minind11.tree" can then be visualised with your favourite tree visualisation tool (e.g. figtree or online at https://phylo.io/)
 
-**Task 2 Question:** Is there structure in this dataset? Are there differences between the PCA base call methods?
+**Task 2 Questions:** Is there structure in this dataset? Are there differences between the PCA base call methods?
 
 ## Run analysis to infer gene flow (D-statistics)  - RUN BUT CANCEL (TAKES TOO LONG)
 **This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)**
@@ -125,7 +126,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
   
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
-* If you have added a population identifier you can filter the results using AWK
+* If you have added a population identifier to the indNames file above, you can filter the results using AWK
 1. Only consider relevant topologies ((Cave,Cave),Spotted)
 2. If the results are negative, flip the H1 and H2 individuals to make it positive for easier comparisons
 
@@ -138,7 +139,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 # Set the working directory
 setwd("~/workshop_materials/31_ancient_genomics/Results/")
 
-# Load the data from each file
+# Load the data from each Jackknifed Dstatistics output file
 data1 <- read.table("Spottedmap_minind11_aardwolfH4.jack.txt", header = TRUE, sep = "\t")
 data2 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
 
