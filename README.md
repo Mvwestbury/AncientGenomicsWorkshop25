@@ -124,7 +124,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
 
 * Create a text file containing a list of IDs for all individuals apart from the outgroup (Dstats_names.txt) -- For easier filtering I add a population identifier before the name e.g. Cave and Spot
-* Perform block jacknifing with the R script as part of the ANGSD toolsuite (Script can be downloaded with -O ANGSD_jackknife.R https://sid.erda.dk/share_redirect/fmXTAv65vF)
+* Perform block jacknifing with the R script as part of the ANGSD toolsuite (Script can be downloaded with `wget -O ANGSD_jackknife.R https://sid.erda.dk/share_redirect/fmXTAv65vF`)
   
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
