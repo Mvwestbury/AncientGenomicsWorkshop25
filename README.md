@@ -172,12 +172,12 @@ filtered_data2 <- data2[grepl("Spot", data1[,1], ignore.case = TRUE) &
 combined_data <- cbind(filtered_data1, filtered_data2)
 
 ## Do a basic plot between the two datasets (Make it look nice if you like)
-plot(combined_data$AardwolfH4_Z,combined_data$StripedH4_Z)
+plot(combined_data$AardwolfH4_Dstat,combined_data$StripedH4_Dstat)
 
 ## Add a 1:1 line to represent unbiased results
 abline(0,1,col=2)
 ```
-**Question:** Do different outgroups give different D or Z values? What about different mapping references
+**Question:** Do different outgroups give different D values? What about different mapping references? Any idea what could cause any differences?
 
 
 
