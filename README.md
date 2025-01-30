@@ -25,12 +25,12 @@ The most common approach to infer aDNA damage patterns is to use Mapdamage https
 ### Run mapdamage (optimised for speed)
  * Example individual - **Ccsp015**
 
-`mapDamage -i Spotted_map_bams/Ccsp015.rmdup.sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -d Results/Ccsp015_mapdamage --downsample 1000000`
+`mapDamage -i Spotted_map_bams/Ccsp015.rmdup.sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -d Ccsp015_mapdamage --downsample 1000000`
   - Example individual - **4035**
 
-`mapDamage -i Spotted_map_bams/4035_map_merged_sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -d Results/4035_mapdamage --downsample 1000000`
+`mapDamage -i Spotted_map_bams/4035_map_merged_sort_RG_Hi1.bam --merge-reference-sequences --no-stats -r Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -d 4035_mapdamage --downsample 1000000`
 - Output directory is defined by -d
-  - In this example the results are found in "Results/Ccsp015_mapdamage"
+  - In this example the results are found in "Ccsp015_mapdamage"
 - Look at the output plots of main interest
   - Fragmisincorporation_plot.pdf + Length_plot.pdf
 
@@ -124,7 +124,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 `angsd -minmapQ 20 -minQ 20 -doCounts 1 -out Spottedmap_minind11_stripedH4 -nThreads 5 -doabbababa 1 -rmtrans 1 -b Bamlist_Dstats_striped.txt -rf Reference_genomes/Crocuta_scaffold1.txt -uniqueonly 1 -minind 11 -uselast 1 -blocksize 1000000 -ref Reference_genomes/Crocuta_scaffold1.fasta -checkbamheaders 0`
 
 * Create a text file containing a list of IDs for all individuals apart from the outgroup (Dstats_names.txt) -- For easier filtering I add a population identifier before the name e.g. Cave and Spot
-* Perform block jacknifing with the R script as part of the ANGSD toolsuite
+* Perform block jacknifing with the R script as part of the ANGSD toolsuite (Script can be downloaded with -O ANGSD_jackknife.R https://sid.erda.dk/share_redirect/fmXTAv65vF)
   
 `Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
@@ -181,11 +181,11 @@ abline(0,1,col=2)
 
 
 
-# Task 3: Ancient DNA simulation - outputs are found in /home/wpsg/workshop_materials/31_ancient_genomics/Results/Task3
+# Task 3: Ancient DNA simulation
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
 
 **Note** This also takes awhile so output can be found in Results/Task3
-* Build fasta using consensus base call in ANGSD and unzip it (Takes ~ seconds to run)
+* Build fasta using consensus base call in ANGSD and unzip it (Takes ~1,000 seconds to run)
 
 `angsd -minq 20 -docounts 1 -minmapq 20 -i Spotted_map_bams/NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -rf Reference_genomes/Crocuta_scaffold1.txt`
 
