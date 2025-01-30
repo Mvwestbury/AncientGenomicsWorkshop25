@@ -43,12 +43,14 @@ Here we will use some commonly implemented approaches in ancient population geno
 
 **Note:** As these take awhile to run, you can start running it but then cancel it with ctrl +c - All results needed can be found in the Results/Task2 directory. Results have been computed using two different reference genomes (Striped and Spotted hyena) and have been split into their own respective directories
 
-## Run analyses to infer population structure
+## Run analyses to infer population structure - Output files can be found in ~/workshop_materials/31_ancient_genomics/Results/Task2
+
 ### PCA (Genotype likelihoods and pseudo haploid base call) - RUN BUT CANCEL (TAKES TOO LONG)
-* Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt)
+* Make a text file with a list of the bam files you want to use (e.g. ls /home/wpsg/workshop_materials/31_ancient_genomics/Spotted_map_bams/*bam > Bamlist.txt **make sure to remove outgroup bams (Aardwolf_map_merged_sort_RG_Hi1.bam and Striped_hyena_map_merged_sort_RG_Hi1.bam) if not necessary **)
+* Make all Bamlist files necessary (Mapped to Spotted hyena, Mapped to Striped hyena, with and without outgroups)
 * Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls in ANGSD - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command or visit the website https://www.popgen.dk/angsd/index.php/ANGSD**
   
-`angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Croc_0.1x_mInd13 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -rf Reference_genomes/Crocuta_scaffold1.txt -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 13 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -checkbamheaders 0`
+`angsd -minmapQ 20 -minQ 20 -doCounts 1 -GL 2 -out Spottedmap_minind11 -nThreads 10 -doGlf 2 -doMajorMinor 1 -rmtrans 1 -doMaf 2 -SNP_pval 1e-6 -b Bamlist.txt -rf Reference_genomes/Crocuta_scaffold1.txt -minmaf 0.05 -skiptriallelic 1 -uniqueonly 1 -minind 11 -dohaplocall 2 -doIBS 2 -minminor 2 -docov 1 -makematrix 1 -ref Reference_genomes/GWHAZPN00000000.genome_HiC.fasta -checkbamheaders 0`
 
 You will get a few outputs of interest, they end in `.ibsMat` `.covMat` and `.beagle.gz`
 
@@ -60,11 +62,14 @@ You will get a few outputs of interest, they end in `.ibsMat` `.covMat` and `.be
 
 * Plot the covariance matrices using R (either ending in .covMat for pseudohaploid or .cov for GL)
 
-  Example plotting code
+  Example plotting code (Change the input files and other parameters
 
 ```R
+# Set the working directory
+setwd("~/workshop_materials/31_ancient_genomics/Results/")
+
 # Import the covariance matrix (either .covMat for pseudohaploid or .cov for GL)
-e=eigen(as.matrix(read.table("Spottedmap_minind11.covMat")))
+e=eigen(as.matrix(read.table("Task2/Spotted_map/Spottedmap_minind11.covMat")))
 
 # Extract eigenvalues
 eigens=e$values/sum(e$values)*100
@@ -93,7 +98,7 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 
 ### Pairwise distances/phylogenetic trees (NJ)
 Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix (.ibsMat) output with the above command. This runs quickly so you can run it yourself
-You can also rerun the command but with an outgroup in the bamfile if you want to construct a rooted tree
+You can also rerun the ANGSD command but with an outgroup in the bamfile if you want to construct a rooted tree (output not available in this tutorial)
 
 * Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top
 
@@ -108,7 +113,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 **Task 2 Question:** Is there structure in this dataset? Are there differences between the PCA base call methods?
 
 ## Run analysis to infer gene flow (D-statistics)  - RUN BUT CANCEL (TAKES TOO LONG)
-This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)
+**This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)**
 
 * Compute Dstatistics in 1Mb blocks using a random base call approach in ANGSD
 
@@ -129,6 +134,9 @@ This requires a new bamlist with the outgroup at the bottom (either striped hyen
 
 * If comparing between methods, you can also filter and plot using R
 ```R
+# Set the working directory
+setwd("~/workshop_materials/31_ancient_genomics/Results/")
+
 # Load the data from each file
 data1 <- read.table("Spottedmap_minind11_aardwolfH4.jack.txt", header = TRUE, sep = "\t")
 data2 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
