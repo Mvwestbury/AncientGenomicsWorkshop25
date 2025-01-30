@@ -210,7 +210,7 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 
 `awk '/\+/{sum+=$3; count[$2]+=$3} END{for (i in count) print i"\t"count[i]/sum}' lgdistribution.txt > Fragment_lengths.txt`
 
-* Run gargammel -- for a list of parameters type `gargammel -h`  **- RUN BUT CANCEL (TAKES TOO LONG)**
+* Run gargammel -- for a list of parameters type `gargammel -h` 
 
 `gargammel.pl -c 1 --comp 0,0,1 -f Results/Task1/Ccsp015_mapdamage/Fragment_lengths.txt -mapdamage Results/Task1/Ccsp015_mapdamage/misincorporation.txt single -rl 80 -o NamCroc.damaged NamCroc`
 
