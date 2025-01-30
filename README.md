@@ -244,11 +244,14 @@ Repeat the analyses from Task 2 but swap out a single (or multiple) modern indiv
 
 * I created three simulated individuals using the mapdamage patterns from Ccsp015 - I used the high coverage ones to ensure the fasta file used in gargammel was highest quality possible.
 
-Again, as the ANGSD commands take awhile to run, all results are found within Results/Task4 and are split between reference genomes - the file name denotes which individual has been damaged and can open the Bamlist*txt files to see their position in the bamlist for later plotting
+Again, as the ANGSD commands take awhile to run, all results are found within *Results/Task4* and are split between reference genomes - the file name denotes which individual has been damaged and can open the Bamlist*txt files to see their position in the bamlist for later plotting
 
 * You can simply plot the PCA and NJ tree as before and visually compare them - change the shape or colour of the damaged individuals to make easier visualisation
 
-For the Dstatistics, you can compare results in a similar manner to above but only look at the comparisons compare the simulated damaged individual to its high quality equivalent
+For the Dstatistics, you can compare results in a similar manner to above but only look at the comparisons comparing the simulated damaged individual to its high quality equivalent
+
+As an example...
+
 ```R
 # Load the data from each file (Change the data2 for some of the other jack.txt files)
 data1 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
