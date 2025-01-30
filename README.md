@@ -60,6 +60,7 @@ You will get a few outputs of interest, they end in `.ibsMat` `.covMat` and `.be
 
 * Use PCANGSD to compute a covariance matrix from the GL beagle file
 
+`pcangsd -h`
 `pcangsd -b Spottedmap_minind11.beagle.gz -t 2 -o Spottedmap_minind11_pcangsd`
 
 * Plot the covariance matrices using R (either ending in .covMat for pseudohaploid or .cov for GL)
