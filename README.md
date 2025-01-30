@@ -254,8 +254,8 @@ As an example...
 
 ```R
 # Load the data from each file (Change the data2 for some of the other jack.txt files)
-data1 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
-data2 <- read.table("Spottedmap_minind11_Namsim_stripedH4.jack.txt", header = TRUE, sep = "\t")
+data1 <- read.table("Task2/Spotted_map/Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
+data2 <- read.table("Task4/Spotted_map/Spottedmap_minind11_Namsim_stripedH4.jack.txt", header = TRUE, sep = "\t")
 
 # Prepend text to the headers of each data frame
 names(data1) <- paste("Original", names(data1), sep = "_")
@@ -267,11 +267,11 @@ combined_data <- cbind(data1, data2)
 
 ## Filter only for rows that contain SIM - I added SIM to the name of the simulated individuals in the Dstats_names.txt file
 filtered_data <- combined_data[grepl("SIM", combined_data$Simulated_H1) | 
-                          grepl("SIM", combined_data$Simulated_H2) | 
-                          grepl("SIM", combined_data$Simulated_H3), ]
+                                 grepl("SIM", combined_data$Simulated_H2) | 
+                                 grepl("SIM", combined_data$Simulated_H3), ]
 
 ## Do a basic plot between the two datasets (Make it look nice if you like)
-plot(filtered_data$Original_D,filtered_data$Simulated_D)
+plot(filtered_data$Original_Dstat,filtered_data$Simulated_Dstat)
 
 ## Add a 1:1 line to represent unbiased results
 abline(0,1,col=2)
