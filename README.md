@@ -13,7 +13,7 @@ In this exercise we will be covering some analyses of palaeogenomic data, how to
 - Striped hyena is from https://doi.org/10.1093/molbev/msy037
 - Aardwolf is from https://doi.org/10.1093/molbev/msab055
 
-**Note**: Analyses can take some time to run so I recommend starting the subsequent analyses while plotting results
+**Note**: Analyses can take some time to run 
 
 
 
@@ -44,7 +44,7 @@ Here we will use some commonly implemented approaches in ancient population geno
 **Note:** As these take awhile to run, you can start running it but then cancel it with ctrl +c - All results needed can be found in the Results/Task2 directory. Results have been computed using two different reference genomes (Striped and Spotted hyena) and have been split into their own respective directories
 
 ## Run analyses to infer population structure
-### PCA (Genotype likelihoods and pseudo haploid base call)
+### PCA (Genotype likelihoods and pseudo haploid base call) - RUN BUT CANCEL (TAKES TOO LONG)
 * Make a text file with a list of the bam files you want to use (e.g. Bamlist.txt)
 * Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls in ANGSD - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command or visit the website https://www.popgen.dk/angsd/index.php/ANGSD**
   
@@ -107,7 +107,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 
 **Task 2 Question:** Is there structure in this dataset? Are there differences between the PCA base call methods?
 
-## Run analysis to infer gene flow (D-statistics)
+## Run analysis to infer gene flow (D-statistics)  - RUN BUT CANCEL (TAKES TOO LONG)
 This requires a new bamlist with the outgroup at the bottom (either striped hyena or aardwolf)
 
 * Compute Dstatistics in 1Mb blocks using a random base call approach in ANGSD
@@ -196,13 +196,13 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 
 `awk '/\+/{sum+=$3; count[$2]+=$3} END{for (i in count) print i"\t"count[i]/sum}' lgdistribution.txt > Fragment_lengths.txt`
 
-* Run gargammel -- for a list of parameters type `gargammel -h`
+* Run gargammel -- for a list of parameters type `gargammel -h`  **- RUN BUT CANCEL (TAKES TOO LONG)**
 
 `gargammel -c 1 --comp 0,0,1 -f Results/Ccsp015_mapdamage/Fragment_lengths.txt -mapdamage Results/Ccsp015_mapdamage/misincorporation.txt single -rl 80 -o NamCroc.damaged Sequences`
 
 The paired end output fastq of interest will end in _s1.fq.gz _s2.fq.gz
 
-* Map reads using the "Ancient_mapping_PE.sh" script availabe in this github
+* Map reads using the "Ancient_mapping_PE.sh" script availabe in this github **- RUN BUT CANCEL (TAKES TOO LONG)**
 ```
 Ancient_mapping_PE.sh 3 . NamCroc Mapping Reference_genomes/Crocuta_scaffold1.fasta 30 0.01
 
@@ -220,12 +220,11 @@ Parameters are:
 
 * Check for damage to see if it has worked (mapdamage output)
 
-* If you like, you can downsample and index the final bam file to similar coverage to the lowest coverage ancient sample
+* **EXTRA If you like** you can downsample and index the final bam file to similar coverage to the lowest coverage ancient sample
 
 `samtools view -s 0.2 -o NamCroc.rmdup.sort_RG_0.2.bam NamCroc.rmdup.sort_RG.bam`
 
 `samtools index NamCroc.rmdup.sort_RG_0.2.bam`
-
 
 
 # Task 4: Investigating biases
@@ -233,7 +232,7 @@ Repeat the analyses from Task 2 but swap out a single (or multiple) modern indiv
 
 Again, as the ANGSD commands take awhile to run, all results are found within Results/Task4 and are split between reference genomes - the file name notes which individual has been damaged and can open the Bamlist*txt files to see their position in the bamlist for later plotting
 
-You can simply plot the PCA and NJ tree as before and visually compare them - maybe change the shape or colour of the damaged individuals to make easier visualisation
+* You can simply plot the PCA and NJ tree as before and visually compare them - change the shape or colour of the damaged individuals to make easier visualisation
 
 For the Dstatistics, you can compare results in a similar manner to above but only look at the comparisons compare the simulated damaged individual to its high quality equivalent
 ```R
@@ -249,6 +248,7 @@ names(data2) <- paste("Simulated", names(data2), sep = "_")
 ## Combine the data
 combined_data <- cbind(data1, data2)
 
+## Filter only for rows that contain SIM - I added SIM to the name of the simulated individuals in the Dstats_names.txt file
 filtered_data <- combined_data[grepl("SIM", combined_data$Simulated_H1) | 
                           grepl("SIM", combined_data$Simulated_H2) | 
                           grepl("SIM", combined_data$Simulated_H3), ]
