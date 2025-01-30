@@ -242,7 +242,7 @@ Parameters are:
 # Task 4: Investigating biases
 Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts in the bamlist. 
 
-*I created three simulated individuals using the mapdamage patterns from Ccsp015 - I used the high coverage ones to ensure the fasta file used in gargammel was highest quality possible.
+* I created three simulated individuals using the mapdamage patterns from Ccsp015 - I used the high coverage ones to ensure the fasta file used in gargammel was highest quality possible.
 
 Again, as the ANGSD commands take awhile to run, all results are found within Results/Task4 and are split between reference genomes - the file name denotes which individual has been damaged and can open the Bamlist*txt files to see their position in the bamlist for later plotting
 
