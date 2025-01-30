@@ -134,7 +134,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 1. Only consider relevant topologies ((Cave,Cave),Spotted)
 2. If the results are negative, flip the H1 and H2 individuals to make it positive for easier comparisons
 
-`awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_stripedH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 5 | less`
+`awk '$1~/Cave/&&$2~/Cave/&&$3~/Spot/ {print}' Spottedmap_minind11_stripedH4.jack.txt | awk '{if ($6>0) print $1,$2,$3,$6,$9; else print $2,$1,$3,$6*-1,$9*-1;}' | sort -r -k 4 | cat <(echo H1 H2 H3 Dscore Zscore) - | column -t | less`
 
 **Question:** Which individuals have the most gene flow? Which have the least? (remember ABBA-BABA / ABBA+BABA so positive = more ABBA) 
 
