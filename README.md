@@ -64,7 +64,7 @@ You will get a few outputs of interest, they end in `.ibsMat` `.covMat` and `.be
 
 * Plot the covariance matrices using R (either ending in .covMat for pseudohaploid or .cov for GL)
 
-  Example plotting code (Change the input files and other parameters
+  Example plotting code
 
 ```R
 # Set the working directory
@@ -97,6 +97,8 @@ legend("top",labes,cex=1,col=c(1,2),pch=16,bty='n')
 #Print as PDF
 dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 ```
+
+**Rerun the PCa but using the results from the the different base call methods and reference genomes*
 
 ### Pairwise distances/phylogenetic trees (NJ)
 Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix (.ibsMat) output with the above command. This runs quickly so you can run it yourself
@@ -140,8 +142,8 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 setwd("~/workshop_materials/31_ancient_genomics/Results/")
 
 # Load the data from each Jackknifed Dstatistics output file
-data1 <- read.table("Spottedmap_minind11_aardwolfH4.jack.txt", header = TRUE, sep = "\t")
-data2 <- read.table("Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
+data1 <- read.table("Task2/Spotted_map/Spottedmap_minind11_aardwolfH4.jack.txt", header = TRUE, sep = "\t")
+data2 <- read.table("Task2/Spotted_map/Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
 
 # Prepend text to the headers of each data frame
 names(data1) <- paste("AardwolfH4", names(data1), sep = "_")
