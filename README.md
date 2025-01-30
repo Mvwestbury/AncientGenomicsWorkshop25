@@ -47,6 +47,7 @@ Here we will use some commonly implemented approaches in ancient population geno
 
 ### PCA (Genotype likelihoods and pseudo haploid base call) - RUN BUT CANCEL (TAKES TOO LONG)
 * Make a text file with a list of the bam files you want to use (e.g. ls /home/wpsg/workshop_materials/31_ancient_genomics/Spotted_map_bams/*bam > Bamlist.txt **make sure to remove outgroup bams (Aardwolf_map_merged_sort_RG_Hi1.bam and Striped_hyena_map_merged_sort_RG_Hi1.bam) if not necessary **)
+* You can also make one more manually using the BAM_information.txt from this Github
 * Make all Bamlist files necessary (Mapped to Spotted hyena, Mapped to Striped hyena, with and without outgroups)
 * Perform genotype likelihood (-GL + -Glf) and pseudohaploid (-doIBS) base calls in ANGSD - This example applies filters I commonly use, **if you want to know what all filters mean they are listed in the .arg file output after running the command or visit the website https://www.popgen.dk/angsd/index.php/ANGSD**
   
@@ -100,9 +101,9 @@ dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 Here we will build an unrooted neighbour joining phylogenetic tree from the distance matrix (.ibsMat) output with the above command. This runs quickly so you can run it yourself
 You can also rerun the ANGSD command but with an outgroup in the bamfile if you want to construct a rooted tree (output not available in this tutorial)
 
-* Add names to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top
+* Add names (in the same order as in the Bamlist file) to the first column of the ibsMat (Distance matrix file) and add number of individuals to a row at the top
 
-e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile`
+e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat <(echo "17") - > Spottedmap_minind11.infile` or make your own from the BAM_information.txt
 
 * Convert distance matrix into newick file using FASTME
 
@@ -177,16 +178,16 @@ abline(0,1,col=2)
 
 
 
-# Task 3: Ancient DNA simulation
+# Task 3: Ancient DNA simulation - outputs are found in /home/wpsg/workshop_materials/31_ancient_genomics/Results/Task3
 In this task we will simulate raw sequencing reads from a high quality modern genome with ancient damage using gargammel and map the reads to a reference genome
 
 **Note** This also takes awhile so output can be found in Results/Task3
-* Build fasta using consensus base call in ANGSD and unzip it
+* Build fasta using consensus base call in ANGSD and unzip it (Takes ~ seconds to run)
 
-`angsd -minq 20 -docounts 1 -minmapq 20 -i NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -rf Reference_genomes/Crocuta_scaffold1.txt`
+`angsd -minq 20 -docounts 1 -minmapq 20 -i Spotted_map_bams/NamCrocuta_map_merged_sort_RG_Hi1.bam -dofasta 2 -setmindepthind 10 -out NamCrocuta -rf Reference_genomes/Crocuta_scaffold1.txt`
 
 `gunzip NamCrocuta.fa.gz`
-* Prepare directories for gargammel including three directories “bact” “cont” “endo” 
+* Prepare directory you want the output to go for gargammel and then within that directory make three directories “bact” “cont” “endo” 
 
 `mkdir NamCroc`
 
@@ -200,7 +201,7 @@ In this task we will simulate raw sequencing reads from a high quality modern ge
 
 `samtools faidx NamCrocuta.fa`
 
-* Create a txt file with the proportion of each fragment length based on the mapdamage read lengths from your empirical data (file lgdistribution.txt in the mapdamage output directory):
+* Create a txt file with the proportion of each fragment length based on the mapdamage read lengths from your empirical data (the file lgdistribution.txt in the mapdamage output directory):
 
 `awk '/\+/{sum+=$3; count[$2]+=$3} END{for (i in count) print i"\t"count[i]/sum}' lgdistribution.txt > Fragment_lengths.txt`
 
@@ -238,7 +239,9 @@ Parameters are:
 # Task 4: Investigating biases
 Repeat the analyses from Task 2 but swap out a single (or multiple) modern individuals with their simulated damaged counterparts in the bamlist. 
 
-Again, as the ANGSD commands take awhile to run, all results are found within Results/Task4 and are split between reference genomes - the file name notes which individual has been damaged and can open the Bamlist*txt files to see their position in the bamlist for later plotting
+*I created three simulated individuals using the mapdamage patterns from Ccsp015 - I used the high coverage ones to ensure the fasta file used in gargammel was highest quality possible.
+
+Again, as the ANGSD commands take awhile to run, all results are found within Results/Task4 and are split between reference genomes - the file name denotes which individual has been damaged and can open the Bamlist*txt files to see their position in the bamlist for later plotting
 
 * You can simply plot the PCA and NJ tree as before and visually compare them - change the shape or colour of the damaged individuals to make easier visualisation
 
