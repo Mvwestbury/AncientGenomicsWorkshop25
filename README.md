@@ -126,7 +126,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 * Create a text file containing a list of IDs for all individuals apart from the outgroup (Dstats_names.txt) -- For easier filtering I add a population identifier before the name e.g. Cave and Spot
 * Perform block jacknifing with the R script as part of the ANGSD toolsuite (Script can be downloaded with `wget -O ANGSD_jackknife.R https://sid.erda.dk/share_redirect/fmXTAv65vF`)
   
-`Rscript ~/Scripts/ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
+`Rscript ANGSD_jackknife.R file=Spottedmap_minind11_stripedH4.abbababa indNames=Dstats_names.txt outfile=Spottedmap_minind11_stripedH4.jack`
 
 * If you have added a population identifier to the indNames file above, you can filter the results using AWK
 1. Only consider relevant topologies ((Cave,Cave),Spotted)
@@ -141,7 +141,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 # Set the working directory
 setwd("~/workshop_materials/31_ancient_genomics/Results/")
 
-# Load the data from each Jackknifed Dstatistics output file
+# Load the data from each Jackknifed Dstatistics output file (try this with multiple combinations of input files)
 data1 <- read.table("Task2/Spotted_map/Spottedmap_minind11_aardwolfH4.jack.txt", header = TRUE, sep = "\t")
 data2 <- read.table("Task2/Spotted_map/Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
 
