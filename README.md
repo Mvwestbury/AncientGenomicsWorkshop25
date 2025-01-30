@@ -141,7 +141,7 @@ e.g. `cut -f 2 -d "_" Dstats_names.txt |paste - Spottedmap_minind11.ibsMat | cat
 # Set the working directory
 setwd("~/workshop_materials/31_ancient_genomics/Results/")
 
-# Load the data from each Jackknifed Dstatistics output file (try this with multiple combinations of input files)
+# Load the data from each Jackknifed Dstatistics output file (try this with multiple combinations of input files e.g. Different references)
 data1 <- read.table("Task2/Spotted_map/Spottedmap_minind11_aardwolfH4.jack.txt", header = TRUE, sep = "\t")
 data2 <- read.table("Task2/Spotted_map/Spottedmap_minind11_stripedH4.jack.txt", header = TRUE, sep = "\t")
 
