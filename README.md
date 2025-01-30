@@ -96,8 +96,6 @@ par(new=T)
 labes=c("Cave", "Spotted")
 legend("top",labes,cex=1,col=c(1,2),pch=16,bty='n')
 
-#Print as PDF
-dev.copy2pdf(file="Spottedmap_PCA_PH.pdf")
 ```
 
 **Rerun the PCa but using the results from the the different base call methods and reference genomes*
